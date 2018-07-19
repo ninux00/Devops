@@ -250,7 +250,8 @@
 			- Runtime: Selecione “Base”
 			- Runtime version: Selecione “aws/codebuild/windows-base:1.0”
 			- Build Specification: Selecione **Insert build commands** e abaixo de **Build commands** clique na opção **Switch do editor** e observe as opções de configurações de exemplo do arquivo **buildspec.yml** que serão exibidas, após isso apague todo o conteúdo e adicione a linhas abaixo:
-			```
+			
+```
 version: 0.2
 phases:
   pre_build:
@@ -268,4 +269,4 @@ artifacts:
   files:
     - '**/*'
   base-directory: AspNetCoreWebApplication/build_output
-			```
+```
