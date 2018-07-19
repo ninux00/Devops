@@ -66,7 +66,8 @@
 	Neste ponto, o ambiente do bastion host está pronto e estaremos conectados à ele. Primeiramente precisamos criar um repositório no CodeCommit para sincronizar com repositório local.
 	- Dentro do Visual Studio, navegue para a janela **Team Explorer**, clique no ícone **Manage Connections** (parece um conector de tomada), novas opções de repositórios surgirão.
 		- Clique em “Connect” na sessão do “AWS CodeCommit”.
-		Como nosso perfil atual do AWS tool kit possui permissão de Administrador por padrão o perfil atual será selecionado, mas caso tivessemos outros perfis configurados, precisariamos selecionar o perfil desejado neste momento. Após conetar-se ao serviço AWS CodeCommit, as opções de criar/clonar repositórios ou sair estarão disponíveis.
+			Como nosso perfil atual do AWS tool kit possui permissão de Administrador por padrão o perfil atual será selecionado, mas caso tivessemos outros perfis configurados, precisariamos selecionar o perfil desejado neste momento.
+			Após conetar-se ao serviço AWS CodeCommit, as opções de criar/clonar repositórios ou sair estarão disponíveis.
 			- Clique em “Create” e preencha as informações solicitadas (nome do repositorio = repo-seunome) e prossiga.
 			- Neste ponto será solitidado novas credenciais, essas credenciais são específicas para acesso ao serviço AWS CodeCommit.
 				- Entre no console AWS e navegue até a página do serviço IAM, selecione “Users”, e clique no usuário “iam-seunome”, na aba “Security Credentials” navegue até a  seção “HTTPS Git credentials for AWS CodeCommit” e clique em “Generate”. Baixe o arquivo csv contendo as credenciais.
