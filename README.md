@@ -270,8 +270,8 @@ artifacts:
     - '**/*'
   base-directory: AspNetCoreWebApplication/build_output
 ```
-
-
+			
+			
 			- Certificate: Selecione **Do not install any certificate**
 		- Seção **Artifacts: Where to put the artifacts from this build project**	
 			- Type: Selecione **Amazon S3**
