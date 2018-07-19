@@ -58,8 +58,7 @@
 		- Account Number - Para saber o número da conta, no painel de gerenciamento AWS, clique em **My Account** e observe o valor do campo **Account ID**.
 		- Salve as configurações.
 
-### Introdução ao CI/CD
-
+## Introdução ao CI/CD
 
 8. **Criando um repositório no  AWS CodeCommit com visual studio 2017**
 
