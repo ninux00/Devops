@@ -2,7 +2,7 @@
 
 ## **Setup do ambiente de desenvolvimento**
 
-1. ### **Criar usuário IAM com acesso de administrador.**
+### 1. **Criar usuário IAM com acesso de administrador.**
     Dentro do console AWS, clique em **Services**, em seguida digite no campo de busca de serviços **IAM** e selecione o serviço **IAM**.
 	- Na página do seviço IAM, crie um novo grupo clicando **Groups”**, em seguida clique em **Create New Group**.
 	- Nomeie o grupo de acordo com sua finalidade, neste caso "Admin”, e prossiga para o próximo passo.
@@ -116,7 +116,7 @@
 11. #### **Criando um branch, comparando branches e submetendo um pull request**
 
 	Volte para o Visual Studio.
-	- Dentro da janela **Team Explorer**, clique no icone **Home** e em seguida em **Branches** e então em **New branch**.
+	- Dentro da janela **Team Explorer**, clique no ícone **Home** e em seguida em **Branches** e então em **New branch**.
 	- Nomeie o novo branch, por exemplo “master.v1".
 	- Escolha o branch de origem, neste caso “master” e clique em create.
 
