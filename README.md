@@ -65,18 +65,18 @@
 
 	Neste ponto, o ambiente do bastion host está pronto e estaremos conectados à ele. Primeiramente precisamos criar um repositório no CodeCommit para sincronizar com repositório local.
 	- Dentro do Visual Studio, navegue para a janela **Team Explorer**, clique no ícone **Manage Connections** (parece um conector de tomada), novas opções de repositórios surgirão.
-		- Clique em “Connect” na sessão do “AWS CodeCommit”.
+		- Clique em **Connect** na sessão do **AWS CodeCommit**.
 			
 		Como nosso perfil atual do AWS tool kit possui permissão de Administrador por padrão o perfil atual será selecionado, mas caso tivessemos outros perfis configurados, precisaríamos selecionar o perfil desejado neste momento.
 		Após conetar-se ao serviço AWS CodeCommit, as opções de criar/clonar repositórios ou sair estarão disponíveis.
 
-		- Clique em “Create” e preencha as informações solicitadas (nome do repositorio = repo-seunome) e prossiga.
+		- Clique em **Create** e preencha as informações solicitadas (nome do repositorio = repo-seunome) e prossiga.
 		- Neste ponto será solitidado novas credenciais, essas credenciais são específicas para acesso ao serviço AWS CodeCommit.
-			- Entre no console AWS e navegue até a página do serviço IAM, selecione “Users”, e clique no usuário “iam-seunome”, na aba “Security Credentials” navegue até a  seção “HTTPS Git credentials for AWS CodeCommit” e clique em “Generate”. Baixe o arquivo csv contendo as credenciais.
-			- Retorne para o Visual Studio e adicione as informações de acesso contidas no arquivo .csv criadas no passo anterior.
+			- Entre no console AWS e navegue até a página do serviço IAM, selecione **Users**, e clique no usuário **iam-seunome**, na aba **Security Credentials** navegue até a  seção **HTTPS Git credentials for AWS CodeCommit** e clique em **Generate**. Baixe o arquivo ".csv" contendo as credenciais.
+			- Retorne para o Visual Studio e adicione as informações de acesso contidas no arquivo ".csv" criadas no passo anterior.
 
- 9. **Baixando o programa de exemplo.**
-    Neste laboratório utilizaremos dois exemplos de aplicação .NET utilizando o SDK da AWS.
+9. **Baixando o programa de exemplo.**
+	Neste laboratório utilizaremos dois exemplos de aplicações .NetCore utilizando o SDK da AWS.
 	- Dentro da janela **Team Explorer**, nas opções de repositório **Local** do git, clique em **Clone** e adicione a ULR do repositório de exemplos de aplicações .NET da AWS, *https://github.com/awslabs/aws-sdk-net-samples.git*.
 		- Após clonar o repositório, abra uma janela do **Windows Explorer** e navegue até a raíz dos repositórios “C:\Users\Administrator\source\repos”.
 		- Copie o conteúdo do diretório *"aws-sdk-net-samples/ConsoleSample/AmazonS3Sample/\*"* e cole dentro do diretório *“repo-seunome/\*”.*
