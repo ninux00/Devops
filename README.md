@@ -2,7 +2,7 @@
 
 ## **Setup do ambiente de desenvolvimento**
 
-### 1. **Criar usuário IAM com acesso de administrador.**
+1. ### **Criar usuário IAM com acesso de administrador.**
     Dentro do console AWS, clique em **Services**, em seguida digite no campo de busca de serviços **IAM** e selecione o serviço **IAM**.
 	- Na página do seviço IAM, crie um novo grupo clicando **Groups”**, em seguida clique em **Create New Group**.
 	- Nomeie o grupo de acordo com sua finalidade, neste caso "Admin”, e prossiga para o próximo passo.
@@ -18,14 +18,14 @@
 		- Revise as cofigurações e clique em **Create User**.
 		- Ao final da criação do usuário será exibido na tela as informações de credenciais para acesso programático, baixe o arquivo “.csv”.
         
- 2. **Criar chave privada para acesso aos hosts.**
+2. ### **Criar chave privada para acesso aos hosts.**
 	- Dentro do console AWS, clique em **Services**, em seguida digite no campo de busca de serviços “EC2” e selecione o serviço **EC2**.
 	- Selecione a região “Ohio”.
 	- No painel lateral esquerdo, procure por **NETWORK & SECURITY** e clique em **Key Pairs**, em seguida clique em **Create Key Pair**.
 		- Nomeie a Key Pair seguindo o padrão “key-seunome” e clique em **Create**.
 		- Baixe o arquivo **key-seunome.pem**.
         
- 3. **Criar instancia EC2  para uso como bastion host (windows 2016) e instalação do Visual Studio.**
+3. ### **Criar instancia EC2  para uso como bastion host (windows 2016) e instalação do Visual Studio.**
  
 	- Ainda na página do serviço EC2, no painel à esquerda, procure por **INSTANCES** e clique em **Instances**.
 	- Clique no botão **Launch Instance**.
@@ -37,21 +37,21 @@
 		- Siga completando o processo até o momento de finalização quando é solicidado a key pair de acesso, selecione a chave criada anteriormente, **key-seunome.pem**. Essa chave será usada para criptografar a senha inicial do usuário **Administrator** do Windows.
 		- Volte para o dashboard de instâncias clicando no id da instância e acompanhe a finalização do provisionamento.
 
-4. **Acessar o bastion host.**
+4. ### **Acessar o bastion host.**
 	- Após a conclusão da inicialização clique no botão “Actions” e selecione “Connect”.
 		- Nesta tela usaremos a key pair “key-seunome” que criamos para descriptografar a senha do “Adminitrator”. Clique em “Get Password”, em seguida em ”Browse” e navegue até o caminho onde salvou o arquivo “key-seunome.pem”. Clique em “Decrypt Password” e copie a senha decriptografada.
 		- Baixe o arquivo de configuração com os dados da conexão RDP e abra com seu cliente RDP de preferência. Use a senha descriptografada para ter acesso como “Adminstrator”.
         
-5. **Baixar e instalar o visual studio 2017.**
+5. ### **Baixar e instalar o visual studio 2017.**
 **Dica** - Por padrão as configurações de segurança do IE bloqueaiam o download. Para simplificar e agilizar o processo podemos desabilitar as configurações de segurança do IE abrindo o **Server Manager** do Windows, em seguida selecione **Local Server** e procure por **IE Enhanced Security Configuration** que estará definido como "On", altere para “Off” e feche o **Server Manager**.
 	- Após conectado via RDP ao bastion host, abra o navegador e baixe o visual studio 2017 Community Edition no link *https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15*
 	- Instale o Visual Studio seguindo o processo NNF (não precisa selecionar nenhum pacote adicional), feche o Visual Studio após finalizar a instalação.
 
-6. **Baixar e instalar o aws toolkit para vs2017.**
+6. ### **Baixar e instalar o aws toolkit para vs2017.**
 	- Baixe o AWS ToolKit para Visual Studio 2017 no link *https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.AWSToolkitforVisualStudio2017*
 	- Clique no instalador e prossiga com a instalação, durante o processo de instalação permita que os os pacotes adicionais  requeridos pelo aws toolkit sejam instalados. Aguarde a conclusão da instalação que pode levar alguns minutos.
 
-7. **Configurando as credenciais de acesso .**
+7. ### **Configurando as credenciais de acesso .**
  	- Ao final da instalação, abra novamente o Visual Studio, estaremos na página do **AWS Gettting Started with Visual Studio 2017**.
 	- Preencha os campos solicitados em **Credential Setup** com as informações salvas no arquivo ".csv" que baixamos no início do tutorial quando criamos o usuário IAM.
 		- Profile Name - Coloque o nome do usuario IAM “iam-seunome” criado anteriormente.
@@ -60,7 +60,7 @@
 
 ## Introdução ao Continuous Integration
 
-8. **Criando um repositório no  AWS CodeCommit com visual studio 2017**
+8. ### **Criando um repositório no  AWS CodeCommit com visual studio 2017**
 
 	Neste ponto, o ambiente do bastion host está pronto e estaremos conectados à ele. Primeiramente precisamos criar um repositório no CodeCommit para sincronizar com repositório local.
 	- Dentro do Visual Studio, navegue para a janela **Team Explorer**, clique no ícone **Manage Connections** (parece um conector de tomada), novas opções de repositórios surgirão.
@@ -74,7 +74,7 @@
 			- Entre no console AWS e navegue até a página do serviço IAM, selecione **Users**, e clique no usuário **iam-seunome**, na aba **Security Credentials** navegue até a  seção **HTTPS Git credentials for AWS CodeCommit** e clique em **Generate**. Baixe o arquivo ".csv" contendo as credenciais.
 			- Retorne para o Visual Studio e adicione as informações de acesso contidas no arquivo ".csv" criadas no passo anterior.
 
-9. **Baixando o programa de exemplo.**
+9. ### **Baixando o programa de exemplo.**
 	
 	Neste laboratório utilizaremos dois exemplos de aplicações .NetCore utilizando o SDK da AWS.
 	- Dentro da janela **Team Explorer**, nas opções de repositório **Local** do git, clique em **Clone** e adicione a ULR do repositório de exemplos de aplicações .NET da AWS, *https://github.com/awslabs/aws-sdk-net-samples.git*.
@@ -104,7 +104,7 @@
 
 
 
-10. **Sincronizando repositório local com repositório AWS CodeCommit**
+10. ### **Sincronizando repositório local com repositório AWS CodeCommit**
 
 	- Dentro da janela **Team Explorer** clique no ícone **Manage Connections** (parece uma tomada), navegue até a seção do **AWS CodeCommit** e selecione o repositório previamente criado **repo-seunome**.
 		- Clique em **Changes** adicione algum comentário e clique em **Commit All**. Desta forma fazemos o commit localmente de todo o conteúdo que copiamos  do diretório “AmazonS3Sample”.
@@ -113,7 +113,7 @@
 		- No console AWS, navegue até o serviço **CodeCommit**.
 		- Clique no nome do seu repositório para explorar as opções.
 
-11. #### **Criando um branch, comparando branches e submetendo um pull request**
+11. ### **Criando um branch, comparando branches e submetendo um pull request**
 
 	Volte para o Visual Studio.
 	- Dentro da janela **Team Explorer**, clique no ícone **Home** e em seguida em **Branches** e então em **New branch**.
