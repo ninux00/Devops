@@ -113,16 +113,17 @@
 		- No console AWS, navegue até o serviço **CodeCommit**.
 		- Clique no nome do seu repositório para explorar as opções.
 
-11. **Criando um branch, comparando branches e submetendo um pull request**
+11. #### **Criando um branch, comparando branches e submetendo um pull request**
 
 	Volte para o Visual Studio.
 	- Dentro da janela **Team Explorer**, clique no icone **Home** e em seguida em **Branches** e então em **New branch**.
 	- Nomeie o novo branch, por exemplo “master.v1".
 	- Escolha o branch de origem, neste caso “master” e clique em create.
 
-	Perceba que no canto inferior esquerdo da janela do Visual Studio aparece o nome do repositório atual e o branch que estamos trabalhando. Neste local é possivel gerenciar os repositórios e branches atuais entre outras funções.
+	Perceba que no canto inferior direito da janela do Visual Studio aparece o nome do repositório atual e o branch que estamos trabalhando. Neste local é possivel gerenciar os repositórios e branches atuais entre outras funções.
 	
-	- Defina o novo branch como o ambiente de trabalho atual e ainda na janela **Team Explorer**, na seção **Solutions** abra a solução **AmazonS3SAmple.sln**.
+	- Defina o novo branch como o ambiente de trabalho atual.
+	- Na janela **Team Explorer**, na seção **Solutions** abra a solução **AmazonS3SAmple.sln**.
 	- Na janela **Solutions Explorer**, edite o arquivo **S3sample.cs** e altere o valor da variável **keyName** para “immersionday-file.v1” e salve com **ctrl+s**.
 	- Clique com o botão direito no arquivo **S3Sample.cs** e em seguida clique em **Commit**.
 		- A janela do **Team explorer** será selecionada já na tela do commit que estamos submetendo, adicione um comentário e clique em **Commit All**.
