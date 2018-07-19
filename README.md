@@ -1,8 +1,8 @@
-## **Workshop DevOps - Windows**
+# **Workshop DevOps - Windows**
 
-### **Setup do ambiente de desenvolvimento**
+## **Setup do ambiente de desenvolvimento**
 
-1.  **Criar usuário IAM com acesso de administrador.**
+1. ### **Criar usuário IAM com acesso de administrador.**
     Dentro do console AWS, clique em **Services**, em seguida digite no campo de busca de serviços **IAM** e selecione o serviço **IAM**.
 	- Na página do seviço IAM, crie um novo grupo clicando **Groups”**, em seguida clique em **Create New Group**.
 	- Nomeie o grupo de acordo com sua finalidade, neste caso "Admin”, e prossiga para o próximo passo.
