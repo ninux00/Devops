@@ -4,19 +4,19 @@
 
 1.  **Criar usuário IAM com acesso de administrador.**
     Dentro do console AWS, clique em **Services**, em seguida digite no campo de busca de serviços **IAM** e selecione o serviço **IAM**.
-	  - Na página do seviço IAM, crie um novo grupo clicando **Groups”**, em seguida clique em **Create New Group**.
-	  - Nomeie o grupo de acordo com sua finalidade, neste caso "Admin”, e prossiga para o próximo passo.
-	  - Atribua as permissões de administrador selecionando a policy **AdministratorAccess**, e prossiga.
-	  - Verifique se as configurações estão corretas e clique em “Create Group”
+	- Na página do seviço IAM, crie um novo grupo clicando **Groups”**, em seguida clique em **Create New Group**.
+	- Nomeie o grupo de acordo com sua finalidade, neste caso "Admin”, e prossiga para o próximo passo.
+	- Atribua as permissões de administrador selecionando a policy **AdministratorAccess**, e prossiga.
+	- Verifique se as configurações estão corretas e clique em “Create Group”
 	    
     Agora vamos criar um usuário e adicioná-lo ao grupo Admin.
-	  - Clique em **Users**, em seguida clique em **Add User**.
-	  - Nomeie o novo usuário seguindo o padrão "iam-seunome".
-	  - Selecione o tipo de acesso do usuário, neste caso selecionaremos ambos os tipo acesso programático e ao gerenciamento do console AWS.
-        	- Adicione uma senha e prossiga.
-        	- Selecione o grupo **Admin** criado anteriormente.
-        	- Revise as cofigurações e clique em **Create User**.
-        	- Ao final da criação do usuário será exibido na tela as informações de credenciais para acesso programático, baixe o arquivo “.csv”.
+	- Clique em **Users**, em seguida clique em **Add User**.
+	- Nomeie o novo usuário seguindo o padrão "iam-seunome".
+	- Selecione o tipo de acesso do usuário, neste caso selecionaremos ambos os tipo acesso programático e ao gerenciamento do console AWS.
+		- Adicione uma senha e prossiga.
+		- Selecione o grupo **Admin** criado anteriormente.
+		- Revise as cofigurações e clique em **Create User**.
+		- Ao final da criação do usuário será exibido na tela as informações de credenciais para acesso programático, baixe o arquivo “.csv”.
         
  2. **Criar chave privada para acesso aos hosts.**
     - Dentro do console AWS, clique em **Services**, em seguida digite no campo de busca de serviços “EC2” e selecione o serviço **EC2**.
