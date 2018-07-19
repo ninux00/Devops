@@ -58,7 +58,7 @@
 		- Account Number - Para saber o número da conta, no painel de gerenciamento AWS, clique em **My Account** e observe o valor do campo **Account ID**.
 		- Salve as configurações.
 
-## Introdução ao CI/CD
+## Introdução ao Continuous Integration
 
 8. **Criando um repositório no  AWS CodeCommit com visual studio 2017**
 
@@ -101,4 +101,40 @@
 	
 		- Salve as alterações de perte F5 para testarmos o programa localmente. O programa deverá listar os buckets já existentes no AWS S3, criar um novo bucket com o nome especificado, criar um objeto dentro do novo bucket com o nome definido em **keyName**, ler o objeto recém criado, deletar o objeto e listar o bucket recém criado. 
 		- Dentro do Visual Studio, navegue até a janela **AWS Explorer** e clique no ícone de **Refresh**, abra a seção do S3 e procure pelo bucket recém criado.
+
+
+
+10. **Sincronizando repositório local com repositório AWS CodeCommit**
+
+	- Dentro da janela **Team Explorer** clique no ícone **Manage Connections** (parece uma tomada), navegue até a seção do **AWS CodeCommit** e selecione o repositório previamente criado **repo-seunome**.
+		- Clique em **Changes** adicione algum comentário e clique em **Commit All**. Desta forma fazemos o commit localmente de todo o conteúdo que copiamos  do diretório “AmazonS3Sample”.
+		- Clique no ícone **Home** (parece uma casa :P) e em seguida em **Sync**. Nesta tela é possivel ver os commits pendentes em ambas as direções.
+		- Na seção **Outgoing Commits** selecione o commit que acabamos de fazer localmente e em seguida clique em **Push** para enviar o código para a nuvem.
+		- No console AWS, navegue até o serviço **CodeCommit**.
+		- Clique no nome do seu repositório para explorar as opções.
+
+11. **Criando um branch, comparando branches e submetendo um pull request**
+
+	Volte para o Visual Studio.
+	- Dentro da janela **Team Explorer**, clique no icone **Home** e em seguida em **Branches** e então em **New branch**.
+	- Nomeie o novo branch, por exemplo “master.v1".
+	- Escolha o branch de origem, neste caso “master” e clique em create.
+
+	Perceba que no canto inferior esquerdo da janela do Visual Studio aparece o nome do repositório atual e o branch que estamos trabalhando. Neste local é possivel gerenciar os repositórios e branches atuais entre outras funções.
+	
+	- Defina o novo branch como o ambiente de trabalho atual e ainda na janela **Team Explorer**, na seção **Solutions** abra a solução **AmazonS3SAmple.sln**.
+	- Na janela **Solutions Explorer**, edite o arquivo **S3sample.cs** e altere o valor da variável **keyName** para “immersionday-file.v1” e salve com **ctrl+s**.
+	- Clique com o botão direito no arquivo **S3Sample.cs** e em seguida clique em **Commit**.
+		- A janela do **Team explorer** será selecionada já na tela do commit que estamos submetendo, adicione um comentário e clique em **Commit All**.
+		- Clique em **Sync** no pop-up e então na tela seguinte clique em **Push** na seção **Outgoing Commits** para enviar as alterações para nuvem.
+	- Dentro do console AWS, navegue até o serviço **AWS CodeCommit**, selecione seu repositório e clique em **Branches**. Aqui é possível definir qual é o branch **default** do repositório.
+		- Na linha do nome do novo branch **master.v1**, clique em **Compare**.
+		- Na tela de comparação de branches, o branch **master** e o branch **master.v1** serão comparados e poderemos visualizar as alterações entre os branches.
+			- Clique em **Split** para comparar as alterações em uma nova visualização.
+			- Adicione um comentário sobre as diferenças e salve.
+	- Clique em **Create Pull Request**.
+		- Na tela de requisição, caso o código de origem e destino possam ser mesclados (o CodeCommit verifica se não há conflitos entre os códigos) poderemos submeter a requisição.
+		- Adicione um título e uma descrição para a requisição  e clique em **Create**.
+
+
 
