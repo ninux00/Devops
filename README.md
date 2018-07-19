@@ -240,15 +240,15 @@
 		- Seção **Configure your project**
 			- Project name: "immersionday-project"
 		- Seção **Source: What to build** 
-			- Source provider: “AWS CodeCommit”
-			- Repository: “repo-immersionday”
-			- Git clone depth: “1”
-			- Build Badge: “Marque” - a caixa de seleção Build Badge serve para se certificar de que o status de compilação do projeto seja visível e incorporável.
+			- Source provider: Selecione **AWS CodeCommit**
+			- Repository: Selecione **repo-immersionday**
+			- Git clone depth: Selecione **1**
+			- Build Badge: **Assinale esta opção** - a caixa de seleção Build Badge serve para se certificar de que o status de compilação do projeto seja visível e incorporável.
  		- Seção **Environment: How to build** 	
-			- Environment image: Selecione “Use an image managed by AWS CodeBuild”
-			- Operating system: Selecione “Windows Server”
-			- Runtime: Selecione “Base”
-			- Runtime version: Selecione “aws/codebuild/windows-base:1.0”
+			- Environment image: Selecione **Use an image managed by AWS CodeBuild**
+			- Operating system: Selecione **Windows Server**
+			- Runtime: Selecione **Base**
+			- Runtime version: Selecione **aws/codebuild/windows-base:1.0**
 			- Build Specification: Selecione **Insert build commands** e abaixo de **Build commands** clique na opção **Switch do editor** e observe as opções de configurações de exemplo do arquivo **buildspec.yml** que serão exibidas, após isso apague todo o conteúdo e adicione a linhas abaixo:
 			
 ```
@@ -270,3 +270,48 @@ artifacts:
     - '**/*'
   base-directory: AspNetCoreWebApplication/build_output
 ```
+
+
+			- Certificate: Selecione **Do not install any certificate**
+		- Seção **Artifacts: Where to put the artifacts from this build project**	
+			- Type: Selecione **Amazon S3**
+			- Name: “artefato.zip”
+			- Path: “artefato.zip”
+			- Namespace type: Selecione **Build ID**
+			- Bucket name: Selecione o mesmo bucket criado pelo codepipeline, algo parecido com **codepipeline-us-east-2-...**
+			- Artifacts packaging: Selecione **Zip**
+		- Seção **Cache**
+			- Type: Selecione **No cache**
+		- Seção **Service role**
+			- Selecione **Create a service role in your account**
+			- Role Name: Se você seguiu os exemplos de nomes sugeridos neste tutorial o valor **codebuild-immersionday-project-service-role** deverá estar preenchido.
+			- Clique em *Continue* 
+	- Step 2: **Review** 
+		- Dê uma olhada nas configurações e clique em **Save and Build**.
+		- Na tela de seleção do repositório para:
+			- Branch: Selecione **master**, em seguida clique em **Start build** e acompanhe a execução do processo de compilação nos logs.
+
+19. ### **Integrando o AWS CodeBuild em nosso pipeline**
+
+	Para alterarmos o processo de build e ao invés de utilizarmos o Jenkins, usarmos o projeto do CodeBuild recém criado, precisamos editar o pipeline.
+	Dentro do console de gerenciamento AWS, navegue até o serviço Code Pipeline, selecione o pipeline **pipe-immersionday** e clique no botão **Edit**.
+	Dentro da caixa da fase **Build**, no canto superior direito clique no ícone **lápis** para editar esta seção. E em seguida clique no ícone + paralelo ao **Jenkins-w16** para adicionar uma nova ação.
+	- Na tela **Add Action** preencha conforma abaixo:
+		- Action category: **Build**
+		- Action Name: **Codebuild**
+		- Build Provider: Selecione **AWS CodeBuild**
+		- Na seção **Configure your project**, selecione **Select an existing build project**
+		- Project name: Selecione o projeto recém criado no AWS CodeBuild **immersionday-project**
+		- Na seção **Input artifacts**, para:
+			- Input artifacts 1: selecione **MyApp**
+			- Output artifact 1: selecione **MyAppBuilt**
+		- Clique em **Add Action** para concluir o processo.
+	- Por fim ainda na caixa da fase **Build** clique no ícone **X** da Action **Jenkins-w16** para removermos a ação de bulid com Jenkins, deixando somente o CodeBuild.
+	- Clique em **Save pipeline changes** e confirme.
+	- Clique em **Release Changes** para testar o pipeline e acompanhe a execução. 
+
+20. ### **Desafio**
+	- Adicione um arquivo buildspec.yml no diretório raiz da aplicação contendo os comandos para o build da aplicação e edite o projeto no console do AWS CodeBuild para usar o arquivo e não as instruções adicionadas via console de gerenciamento nos passos anteriores.
+	- Através do bastion host edite, edite o index faça o commit da aplicação web para que a mensagem exibida na página seja “You just created a ASP.Net Core web application and published it using CodePipeline integrated with CodeBuild and Elastic Beanstalk!”
+
+
