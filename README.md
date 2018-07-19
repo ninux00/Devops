@@ -36,3 +36,28 @@
         - Nas configurações de **security group**, edite o campo **Source** clicando em **Custom** e altere para **My IP**. Desta forma já limitamos muito as possibilidades de ataques permitindo somente conexões originadas de uma única origem conhecida (obs: em ambientes de produção certifique-se de adicionar todos os endereços IP utilizados pela empresa para acesso à internet). Adicione um nome amigável ao security group de forma que possa reutilizá-lo em regras futuras. Por exemplo, “myip-rdp-allow”.
         - Siga completando o processo até o momento de finalização quando é solicidado a key pair de acesso, selecione a chave criada anteriormente, **key-seunome.pem**. Essa chave será usada para criptografar a senha inicial do usuário **Administrator** do Windows.
         - Volte para o dashboard de instâncias clicando no id da instância e acompanhe a finalização do provisionamento.
+
+ 4. **Acessar o bastion host.**
+	- Após a conclusão da inicialização clique no botão “Actions” e selecione “Connect”.
+		- Nesta tela usaremos a key pair “key-seunome” que criamos para descriptografar a senha do “Adminitrator”. Clique em “Get Password”, em seguida em ”Browse” e navegue até o caminho onde salvou o arquivo “key-seunome.pem”. Clique em “Decrypt Password” e copie a senha decriptografada.
+		- Baixe o arquivo de configuração com os dados da conexão RDP e abra com seu cliente RDP de preferência. Use a senha descriptografada para ter acesso como “Adminstrator”.
+        
+ 5. **Baixar e instalar o visual studio 2017.**
+**Dica** - Por padrão as configurações de segurança do IE bloqueaiam o download. Para simplificar e agilizar o processo podemos desabilitar as configurações de segurança do IE abrindo o **Server Manager** do Windows, em seguida selecione **Local Server** e procure por **IE Enhanced Security Configuration** que estará definido como "On", altere para “Off” e feche o **Server Manager**.
+	- Após conectado via RDP ao bastion host, abra o navegador e baixe o visual studio 2017 Community Edition no link *https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15*
+	- Instale o Visual Studio seguindo o processo NNF (não precisa selecionar nenhum pacote adicional), feche o Visual Studio após finalizar a instalação.
+
+ 6. **Baixar e instalar o aws toolkit para vs2017.**
+	- Baixe o AWS ToolKit para Visual Studio 2017 no link *https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.AWSToolkitforVisualStudio2017*
+	- Clique no instalador e prossiga com a instalação, durante o processo de instalação permita que os os pacotes adicionais  requeridos pelo aws toolkit sejam instalados. Aguarde a conclusão da instalação que pode levar alguns minutos.
+
+ 7. **Configurando as credenciais de acesso .**
+ 	- Ao final da instalação, abra novamente o Visual Studio, estaremos na página do **AWS Gettting Started with Visual Studio 2017**.
+	- Preencha os campos solicitados em **Credential Setup** com as informações salvas no arquivo ".csv" que baixamos no início do tutorial quando criamos o usuário IAM.
+		- Profile Name - Coloque o nome do usuario IAM “iam-seunome” criado anteriormente.
+		- Account Number - Para saber o número da conta, no painel de gerenciamento AWS, clique em **My Account** e observe o valor do campo **Account ID**.
+		- Salve as configurações.
+
+### Introdução ao CI/CD
+
+
