@@ -37,21 +37,21 @@
 		- Siga completando o processo até o momento de finalização quando é solicidado a key pair de acesso, selecione a chave criada anteriormente, **key-seunome.pem**. Essa chave será usada para criptografar a senha inicial do usuário **Administrator** do Windows.
 		- Volte para o dashboard de instâncias clicando no id da instância e acompanhe a finalização do provisionamento.
 
- 4. **Acessar o bastion host.**
+4. **Acessar o bastion host.**
 	- Após a conclusão da inicialização clique no botão “Actions” e selecione “Connect”.
 		- Nesta tela usaremos a key pair “key-seunome” que criamos para descriptografar a senha do “Adminitrator”. Clique em “Get Password”, em seguida em ”Browse” e navegue até o caminho onde salvou o arquivo “key-seunome.pem”. Clique em “Decrypt Password” e copie a senha decriptografada.
 		- Baixe o arquivo de configuração com os dados da conexão RDP e abra com seu cliente RDP de preferência. Use a senha descriptografada para ter acesso como “Adminstrator”.
         
- 5. **Baixar e instalar o visual studio 2017.**
+5. **Baixar e instalar o visual studio 2017.**
 **Dica** - Por padrão as configurações de segurança do IE bloqueaiam o download. Para simplificar e agilizar o processo podemos desabilitar as configurações de segurança do IE abrindo o **Server Manager** do Windows, em seguida selecione **Local Server** e procure por **IE Enhanced Security Configuration** que estará definido como "On", altere para “Off” e feche o **Server Manager**.
 	- Após conectado via RDP ao bastion host, abra o navegador e baixe o visual studio 2017 Community Edition no link *https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15*
 	- Instale o Visual Studio seguindo o processo NNF (não precisa selecionar nenhum pacote adicional), feche o Visual Studio após finalizar a instalação.
 
- 6. **Baixar e instalar o aws toolkit para vs2017.**
+6. **Baixar e instalar o aws toolkit para vs2017.**
 	- Baixe o AWS ToolKit para Visual Studio 2017 no link *https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.AWSToolkitforVisualStudio2017*
 	- Clique no instalador e prossiga com a instalação, durante o processo de instalação permita que os os pacotes adicionais  requeridos pelo aws toolkit sejam instalados. Aguarde a conclusão da instalação que pode levar alguns minutos.
 
- 7. **Configurando as credenciais de acesso .**
+7. **Configurando as credenciais de acesso .**
  	- Ao final da instalação, abra novamente o Visual Studio, estaremos na página do **AWS Gettting Started with Visual Studio 2017**.
 	- Preencha os campos solicitados em **Credential Setup** com as informações salvas no arquivo ".csv" que baixamos no início do tutorial quando criamos o usuário IAM.
 		- Profile Name - Coloque o nome do usuario IAM “iam-seunome” criado anteriormente.
@@ -61,16 +61,16 @@
 ### Introdução ao CI/CD
 
 
- 8. **Criando um repositório no  AWS CodeCommit com visual studio 2017**
-    Neste ponto, o ambiente do bastion host está pronto e estaremos conectados à ele. Primeiramente precisamos criar um repositório no CodeCommit para sincronizar com repositório local.
-	- Dentro do Visual Studio, navegue para a janela **Team Explorer**, clique no icone **Manage Connections** (parece um conector de tomada), novas opções de repositórios surgirão.
+8. **Criando um repositório no  AWS CodeCommit com visual studio 2017**
+
+Neste ponto, o ambiente do bastion host está pronto e estaremos conectados à ele. Primeiramente precisamos criar um repositório no CodeCommit para sincronizar com repositório local.
+	- Dentro do Visual Studio, navegue para a janela **Team Explorer**, clique no ícone **Manage Connections** (parece um conector de tomada), novas opções de repositórios surgirão.
 		- Clique em “Connect” na sessão do “AWS CodeCommit”.
-			- Como nosso perfil atual do AWS tool kit possui permissão de Administrador por padrão o perfil atual será selecionado, mas caso tivessemos outros perfis configurados, precisariamos selecionar o perfil desejado neste momento. 
-			- Após conetar ao serviço AWS CodeCommit, as opções de criar/clonar repositórios ou sair estarão disponíveis.
+		Como nosso perfil atual do AWS tool kit possui permissão de Administrador por padrão o perfil atual será selecionado, mas caso tivessemos outros perfis configurados, precisariamos selecionar o perfil desejado neste momento. Após conetar-se ao serviço AWS CodeCommit, as opções de criar/clonar repositórios ou sair estarão disponíveis.
 			- Clique em “Create” e preencha as informações solicitadas (nome do repositorio = repo-seunome) e prossiga.
 			- Neste ponto será solitidado novas credenciais, essas credenciais são específicas para acesso ao serviço AWS CodeCommit.
-			- Entre no console AWS e navegue até a página do serviço IAM, selecione “Users”, e clique no usuário “iam-seunome”, na aba “Security Credentials” navegue até a  seção “HTTPS Git credentials for AWS CodeCommit” e clique em “Generate”. Baixe o arquivo csv contendo as credenciais.
-			- Retorne para o Visual Studio e adicione as informações de acesso contidas no arquivo .csv criadas no passo anterior.
+				- Entre no console AWS e navegue até a página do serviço IAM, selecione “Users”, e clique no usuário “iam-seunome”, na aba “Security Credentials” navegue até a  seção “HTTPS Git credentials for AWS CodeCommit” e clique em “Generate”. Baixe o arquivo csv contendo as credenciais.
+				- Retorne para o Visual Studio e adicione as informações de acesso contidas no arquivo .csv criadas no passo anterior.
 
  9. **Baixando o programa de exemplo.**
     Neste laboratório utilizaremos dois exemplos de aplicação .NET utilizando o SDK da AWS.
