@@ -137,5 +137,109 @@
 		- Na tela de requisição, caso o código de origem e destino possam ser mesclados (o CodeCommit verifica se não há conflitos entre os códigos) poderemos submeter a requisição.
 		- Adicione um título e uma descrição para a requisição  e clique em **Create**.
 
+12. ### **Desafio**
+	- Crie um novo repositório local e clone este repositório *https://github.com/filomenka/fnemec-aws-lab-29-30-05*
+	- Baixe e instale o SDK do .NetCore 2.0  conforme link *https://www.microsoft.com/net/learn/get-started/windows*
+	- Teste a aplicação localmente com o VS2017.
+	- Crie um novo repositório no AWS CodeCommit com nome "repo-immersionday” e envie o código recém clonado para a núvem.
 
+13. ### **Publicando a aplicação no AWS Elastic Beanstalk através do VS2017**
+	- Dentro do Visual Studio 2017, na janela **Solutions Explorer**, clique com o botão direto sobre a solução **AspNetCoreWebApplication** que clonamos no passo anterior e em seguida clique em **Publish to AWS Elastic Beanstalk**.
+        - Na tela de publicação, defina o perfil de conta AWS **iam-seunome** e a região desejada, no caso **Ohio**.
+		- Selecione a opção **Create a new application environment** e prossiga.
+		- Na tela **Application Environment**, defina:
+			- Um nome para a nova aplicação, por exemplo **AspNetCoreWebApplication**.
+			- Selecione o environment, por exemplo **AspNetCoreWebApplication-dev**.
+			- Crie um nome para o endpoint do aplicação no Elastic Beanstalk, verifique a disponibilidade e uma vez que o nome esteja disponível prossiga.
+		- Na tela **Amazon EC2 Launch Configuration**:
+		- No campo **Container type** selecione a imagem **64bit Windows Server 2016 v1.2.0 running IIS 10.0**.
+		- No campo **Instance type** selecione **t2.large**.
+		- No campo **Key pair** selecione a chave criada inicialmente neste tutorial **key-seunome** e prossiga.
+	- Na tela **Permissions** selecione as opções de role padrão para que o Elastic Beanstalk tenha as permissões necessárias para fazer o deploy da aplicação e prossiga.
+	- Na tela **Application Options**, mantenha as configurações padrão e prossiga.
+	- Na próxima tela revise as configurações e clique em **Deploy**.
+	- Aguarde a conclusão do provisionamento do ambiente e acesse a URL da aplicação fornecida pelo Elastic Beanstalk para visualizar a aplicação rodando na nuvem.
+
+14. ### **Criar uma AMI customizada e uma nova instância para instalarmos o Jenkins**
+	- Acesse o console de gerenciamento AWS e navegue até o serviço **EC2**.
+	- Selecione a instância que criamos manualmente no início deste tutorial, clique em **Actions**, em seguida clique em **Instance State** e então em **Stop**.
+	- Aguarde o desligamento da instância e novamente, clique em **Actions**, em seguida clique em **Image** e então em **Create image**.
+	- Na tela de criação de imagem, adicione um nome a nova AMI e clique em **Create Image**.
+	- Crie uma nova instância a partir da AMI recém criada, ela estará disponivel na lista de **My AMIs**. Lembre-se de utilizar o mesmo security group e key pair criados anteriomente neste tutorial.
+                
+15. ### **Instalando o servidor Jenkins na instância EC2**
+    * Depois de conectar na nova instância (use mesma senha da instância bastion-host no momento da criação da AMI), faça o download do instalador do Jenkins para Windows disponível em https://jenkins.io/download (https://jenkins.io/download/) - versão utilizada Jenkins 2.121.1 LTS
+        * Execute o instalador e instale o jenkins com as configurações padrão, ao final do processo de instalação uma página web será aberta no endereço “http://localhost:8080” (aguarde um momento e atualize a página, o servidor web está inicializando … :P) informando um arquivo com a senha do usuário Administrador do Jenkins, abra o arquivo, copiei e cole a senha no local indicado na página e prossiga.
+            * Na página seguinte selecione a opção “Select plugins to install” e prossiga.
+            * Na página de seleção de plugins, analise as opções e na seção “Build Tools” remova os plugins “Ant” e “Gradle” e prossiga. No final do processo você deverá criar um novo usuário e senha para gestão do Jenkins.
+ 17. *16 - Instalando e configurando o AWS CodePipeline Plugin em um novo projeto*
+        * Inicie o Jenkins e, na página inicial, selecione “Manage Jenkins“. 
+        * Na página “Manage Jenkins”, selecione “Manage plug-ins”. 
+        * Selecione a guia “Available” e, na caixa de pesquisa “Filter”, digite *AWS CodePipeline*. Selecione o “AWS CodePipeline Plugin for Jenkins” na lista e então, clique no botão “Download now and install after restart”. 
+        * Na página “Instalar plug-ins/atualizações”,  selecione a check-box “Restart Jenkins when installation is complete and no jobs are running”. Isso reiniciará o Jenkins, uma outra forma de reiniciar o serviço Jenkins é realizar uma chamada Rest para http://localhost:8080/safeRestart
+        * Após o restart do Jenkins autentique-se novamente. 
+        * Na página principal, selecione “Novo item”. 
+	        -  Em “Nome do item”, digite um nome para o projeto Jenkins (por exemplo, “immertionday-project”). Selecione Projeto estilo livre” e depois “OK”. 
+            * Na página de configuração do projeto, 
+	            * Na seção “General”, selecione a caixa de seleção “Execute concurrent builds if necessary“. 
+	            * Na seção “Source Code Management”, selecione “AWS CodePipeline”. 
+			            * Selecione a região de “Ohio” (US-EAST-2)
+			            * Deixe as configurações de proxy em branco.
+			            * Adicione as credenciais (AccessKey SecretAccesKey) do usuário “iam-seunome” contidas no arquivo .csv criado anteriormente neste tutorial.
+			            * Selecione a opção “Clear workspace before copying”
+			            * Na seção “CodePipeline action type”:
+				            * No campo “Category” selecione “Build” 
+				            * No campo “Provider” adicione um nome para identificar este servidor Jenkins durante a configuração do AWS CodePipeline, por exemplo “Jenkins-w16”.
+				            * No campo “Version” deixe o valor padrão “1”.
+			* Na seção “Build Triggers”, selecione “Poll SCM”.
+				* No campo “Schedule” adicione uma instrução de periodicidade no mesmo formato do cron, neste exemplo queremos a execução da trigger a cada minuto, portanto adicione 5 * separados por espaços, assim “* * * * *”.
+			* Na seção “Build Enviroment”, não adicione nenhuma opção.
+			* Na seção “Build”, clique em “Add build step” e selecione “Execute windows batch commands”
+					* No campo “Commands” adicione os comandos abaixo:
+					dotnet restore AspNetCoreWebApplication/AspNetCoreWebApplication.csproj 
+					dotnet restore AspNetCoreWebApplicationTest/AspNetCoreWebApplicationTest.csproj
+					dotnet publish -c release -o ./build_output AspNetCoreWebApplication/AspNetCoreWebApplication.csproj
+					dotnet publish -c release -o ./test_output AspNetCoreWebApplicationTest/AspNetCoreWebApplicationTest.csproj
+					dotnet vstest AspNetCoreWebApplicationTest/test_output/AspNetCoreWebApplicationTest.dll
+
+		* Na seção “Post-build Actions”, clique no botão “Add post-build actions” e selecione “AWS CodePipeline Publisher”
+			* Nas opções do “AWS CodePipeline Publisher”, clique em “Add” para publicar um diretório especifico do seu projeto, no nosso caso o diretório “build_output” que conterá nossa aplicação compilada após a execução dos comandos na seção de “Build”.
+				* No campo “Location”, adicione “AspNetCoreWebApplication/build_output”.
+				* No campo “Artifact Name”, adicione um nome (por exemplo “MyAppBuilt”) para pacote que será produzido a partir do conteúdo especificado em “Location” . Este nome de artefato também será utilizado durante a configuração do AWS CodePipeline na fase de integração com Jenkins.
+	        * Selecione *Salvar* para salvar seu projeto Jenkins. 
+
+ 18. *18 - Criando um Pipeline de desenvolvimento - Continuous Delivery*
+Neste momento já temos todos os componentes para a execução de um processo de integração e entrega contínua, temos nossa origem de código, temos o servidor Jenkins configurado para compilar e testar o código e temos um ambiente provisionado no AWS Elastic Beanstalk para hospedar nossa aplicação. Agora precisamos de um componente para orquestrar o fluxo durante o processo, para isso utilizaremos o AWS CodePipeline. Dentro do console AWS navegue até o serviço AWS CodePipeline e clique em “Get started”:
+            * Step 1 - Name: Nomeie o pipeline, como por exemplo “pipe-immersionday”.
+            * Step 2 - Source: Selecione a o local de origem que o AWS CodePipeline utilizará como ponto de partida para processo. Neste caso selecione a opção “AWS CodeCommit”,  escolha o repositório “repo-immersionday” e o branch “master” e prossiga.
+            * Step 3 - Build: em “Build Provider”, selecione “Add Jenkins”
+	            * Na seção “Add Jenkins”, em:
+		            * “Provider Name”, adicione o mesmo nome configurado no Jenkins durante a configuração do plugin AWS CodePipeline, neste caso “Jenkins-w16”.
+		            * “Server URL”, adicione o endereço DNS público da instância EC2 que você instalou o Jenkins e adicione a porta 8080, algo neste formato “http://ec2-18-191-128-194.us-east-2.compute.amazonaws.com:8080”
+		            * “Project Name”, adicione o nome do projeto criado no Jenkins anteriormente, neste caso “immertionday-project” e prossiga.
+	- Step 4 - Deploy:  no campo “Deployment Provider”, selecione “AWS Elastic Beanstalk”.
+		- Na seção “AWS Elastic Beanstalk”, secione a aplicação e o ambiente criados anteriormente ao publicar nossa aplicação através do VS2017, neste caso:
+			- No campo “Application name”: adicione “AspNetCoreWebApplication”
+			- No campo “Environment name”: adicione “AspNetCoreWebApplication-env” e prossiga.
+	- Step 5 -  AWS Service Role: no campo “Role Name” selecione a opção “AWS-CodePipeline-Service” e prossiga.
+	- Step 6 - Revise as configurações do pipeline e clique em “Create Pipeline”.
+	- Step 7 - Clique em “Release change” na tela do pipeline recém criado.
+	- Step 8 - Faça uma alteração na aplicação e acompanhe a execução do pipeline, desde o commit, passando pelo processo de build no Jenkins (aproveite para ver os logs e as informações de pooling de novas tarefas do plugin do codepipeline) até o deploy no EB.
+		
+ 19. 19 - Criando um projeto com AWS CodeBuild
+Neste passo iremos configurar o processo de build da aplicação utilizando o serviço AWS CodeBuild. Para isso, dentro do painel de gerenciamento da AWS, navegue até o serviço AWS CodeBuild e clique em “Get Started” e preencha os campos conforme abaixo:
+	- Step 1: Configure Project
+	- Seção “Configure your project”
+		- Project name: “immersionday-project”
+	- Seção “Source: What to build” 
+		- Source provider: “AWS CodeCommit”
+		- Repository: “repo-immersionday”
+		- Git clone depth: “1”
+		- Build Badge: “Marque” -  a caixa de seleção Build Badge serve para se certificar de que o status de compilação do projeto seja visível e incorporável.
+ 20. Seção “Environment: How to build” 	
+		- Environment image: Selecione “Use an image managed by AWS CodeBuild”
+		- Operating system: Selecione “Windows Server”
+		- Runtime: Selecione “Base”
+		- Runtime version: Selecione “aws/codebuild/windows-base:1.0”
+		- Build Specification: Selecione “Insert build commands” e abaixo de “Build commands” clique na opção “Switch do editor” e observe as opções de configurações do arquivo “buildspec.yml”, após isso apague todo o conteúdo e adicione a linhas abaixo:
 
