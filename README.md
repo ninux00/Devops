@@ -13,17 +13,17 @@
 	  - Clique em **Users**, em seguida clique em **Add User**.
 	  - Nomeie o novo usuário seguindo o padrão "iam-seunome".
 	  - Selecione o tipo de acesso do usuário, neste caso selecionaremos ambos os tipo acesso programático e ao gerenciamento do console AWS.
-        	* Adicione uma senha e prossiga.
-        	* Selecione o grupo **Admin** criado anteriormente.
-        	* Revise as cofigurações e clique em **Create User**.
-        	* Ao final da criação do usuário será exibido na tela as informações de credenciais para acesso programático, baixe o arquivo “.csv”.
+        	- Adicione uma senha e prossiga.
+        	- Selecione o grupo **Admin** criado anteriormente.
+        	- Revise as cofigurações e clique em **Create User**.
+        	- Ao final da criação do usuário será exibido na tela as informações de credenciais para acesso programático, baixe o arquivo “.csv”.
         
  2. **Criar chave privada para acesso aos hosts.**
-    * Dentro do console AWS, clique em **Services**, em seguida digite no campo de busca de serviços “EC2” e selecione o serviço **EC2**.
-    * Selecione a região “Ohio”.
-    * No painel lateral esquerdo, procure por **NETWORK & SECURITY** e clique em **Key Pairs**, em seguida clique em **Create Key Pair**.
-        * Nomeie a Key Pair seguindo o padrão “key-seunome” e clique em **Create**.
-        * Baixe o arquivo **key-seunome.pem**.
+    - Dentro do console AWS, clique em **Services**, em seguida digite no campo de busca de serviços “EC2” e selecione o serviço **EC2**.
+    - Selecione a região “Ohio”.
+    - No painel lateral esquerdo, procure por **NETWORK & SECURITY** e clique em **Key Pairs**, em seguida clique em **Create Key Pair**.
+        - Nomeie a Key Pair seguindo o padrão “key-seunome” e clique em **Create**.
+        - Baixe o arquivo **key-seunome.pem**.
         
  3. **Criar instancia EC2  para uso como bastion host (windows 2016) e instalação do Visual Studio.**
  
