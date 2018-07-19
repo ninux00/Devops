@@ -63,7 +63,7 @@
 
 8. **Criando um repositório no  AWS CodeCommit com visual studio 2017**
 
-Neste ponto, o ambiente do bastion host está pronto e estaremos conectados à ele. Primeiramente precisamos criar um repositório no CodeCommit para sincronizar com repositório local.
+	Neste ponto, o ambiente do bastion host está pronto e estaremos conectados à ele. Primeiramente precisamos criar um repositório no CodeCommit para sincronizar com repositório local.
 	- Dentro do Visual Studio, navegue para a janela **Team Explorer**, clique no ícone **Manage Connections** (parece um conector de tomada), novas opções de repositórios surgirão.
 		- Clique em “Connect” na sessão do “AWS CodeCommit”.
 		Como nosso perfil atual do AWS tool kit possui permissão de Administrador por padrão o perfil atual será selecionado, mas caso tivessemos outros perfis configurados, precisariamos selecionar o perfil desejado neste momento. Após conetar-se ao serviço AWS CodeCommit, as opções de criar/clonar repositórios ou sair estarão disponíveis.
