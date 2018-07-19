@@ -215,37 +215,39 @@
 			- Selecione **Salvar** para salvar seu projeto de build. 
 
 17. ### **Criando um Pipeline de desenvolvimento - Continuous Delivery**
-Neste momento já temos todos os componentes para a execução de um processo de integração e entrega contínua, temos nossa origem de código, temos o servidor Jenkins configurado para compilar e testar o código e temos um ambiente provisionado no AWS Elastic Beanstalk para hospedar nossa aplicação. Agora precisamos de um componente para orquestrar o fluxo durante o processo, para isso utilizaremos o AWS CodePipeline. Dentro do console AWS navegue até o serviço AWS CodePipeline e clique em “Get started”:
-            * Step 1 - Name: Nomeie o pipeline, como por exemplo “pipe-immersionday”.
-            * Step 2 - Source: Selecione a o local de origem que o AWS CodePipeline utilizará como ponto de partida para processo. Neste caso selecione a opção “AWS CodeCommit”,  escolha o repositório “repo-immersionday” e o branch “master” e prossiga.
-            * Step 3 - Build: em “Build Provider”, selecione “Add Jenkins”
-	            * Na seção “Add Jenkins”, em:
-		            * “Provider Name”, adicione o mesmo nome configurado no Jenkins durante a configuração do plugin AWS CodePipeline, neste caso “Jenkins-w16”.
-		            * “Server URL”, adicione o endereço DNS público da instância EC2 que você instalou o Jenkins e adicione a porta 8080, algo neste formato “http://ec2-18-191-128-194.us-east-2.compute.amazonaws.com:8080”
-		            * “Project Name”, adicione o nome do projeto criado no Jenkins anteriormente, neste caso “immertionday-project” e prossiga.
-	- Step 4 - Deploy:  no campo “Deployment Provider”, selecione “AWS Elastic Beanstalk”.
-		- Na seção “AWS Elastic Beanstalk”, secione a aplicação e o ambiente criados anteriormente ao publicar nossa aplicação através do VS2017, neste caso:
-			- No campo “Application name”: adicione “AspNetCoreWebApplication”
-			- No campo “Environment name”: adicione “AspNetCoreWebApplication-env” e prossiga.
-	- Step 5 -  AWS Service Role: no campo “Role Name” selecione a opção “AWS-CodePipeline-Service” e prossiga.
-	- Step 6 - Revise as configurações do pipeline e clique em “Create Pipeline”.
-	- Step 7 - Clique em “Release change” na tela do pipeline recém criado.
+
+	Neste momento já temos todos os componentes para a execução de um processo de integração e entrega contínua, temos nossa origem de código, temos o servidor Jenkins configurado para compilar e testar o código e temos um ambiente provisionado no AWS Elastic Beanstalk para hospedar nossa aplicação. Agora precisamos de um componente para orquestrar todo o fluxo durante o processo, para isso utilizaremos o AWS CodePipeline. Dentro do console de gerenciamento AWS navegue até o serviço **AWS CodePipeline** e clique em **Get started**:
+	- Step 1 - Name: Nomeie o pipeline, como por exemplo **pipe-immersionday**.
+	- Step 2 - Source: Selecione o local de origem que o AWS CodePipeline utilizará como ponto de partida para processo de integração e entrega contínua. Neste caso, selecione a opção **AWS CodeCommit**, escolha o repositório **repo-immersionday** e o branch **master** e prossiga.
+	- Step 3 - Build: em **Build Provider**, selecione **Add Jenkins**.
+		- Na seção **Add Jenkins**, em:
+			- **Provider Name**, adicione o mesmo nome configurado no Jenkins durante a configuração do plugin AWS CodePipeline, neste caso **Jenkins-w16**.
+			- **Server URL**, adicione o endereço DNS público da instância EC2 que você instalou o Jenkins e adicione a porta 8080, algo neste formato *http://ec2-20-190-228-174.us-east-2.compute.amazonaws.com:8080*
+			- **Project Name**, adicione o nome do projeto criado no Jenkins anteriormente, neste caso **immertionday-project** e prossiga.
+	- Step 4 - Deploy: no campo **Deployment Provider**, selecione **AWS Elastic Beanstalk**.
+		- Na seção **AWS Elastic Beanstalk**, secione a aplicação e o ambiente criados anteriormente ao publicar nossa aplicação através do VS2017, neste caso:
+			- No campo **Application name**: adicione **AspNetCoreWebApplication**.
+			- No campo **Environment name**: adicione **AspNetCoreWebApplication-env** e prossiga.
+	- Step 5 -  AWS Service Role: no campo **Role Name** selecione a opção **AWS-CodePipeline-Service** e prossiga.
+	- Step 6 - Revise as configurações do pipeline e clique em **Create Pipeline**.
+	- Step 7 - Clique em **Release change** na tela do pipeline recém criado.
 	- Step 8 - Faça uma alteração na aplicação e acompanhe a execução do pipeline, desde o commit, passando pelo processo de build no Jenkins (aproveite para ver os logs e as informações de pooling de novas tarefas do plugin do codepipeline) até o deploy no EB.
 		
- 19. 19 - Criando um projeto com AWS CodeBuild
-Neste passo iremos configurar o processo de build da aplicação utilizando o serviço AWS CodeBuild. Para isso, dentro do painel de gerenciamento da AWS, navegue até o serviço AWS CodeBuild e clique em “Get Started” e preencha os campos conforme abaixo:
+18. ### **Criando um projeto com AWS CodeBuild**
+
+	Neste passo iremos configurar o processo de build da aplicação utilizando o serviço **AWS CodeBuild**. Para isso, dentro do painel de gerenciamento da AWS, navegue até o serviço **AWS CodeBuild** e clique em **Get Started** e preencha os campos conforme abaixo:
 	- Step 1: Configure Project
-	- Seção “Configure your project”
-		- Project name: “immersionday-project”
-	- Seção “Source: What to build” 
-		- Source provider: “AWS CodeCommit”
-		- Repository: “repo-immersionday”
-		- Git clone depth: “1”
-		- Build Badge: “Marque” -  a caixa de seleção Build Badge serve para se certificar de que o status de compilação do projeto seja visível e incorporável.
- 20. Seção “Environment: How to build” 	
-		- Environment image: Selecione “Use an image managed by AWS CodeBuild”
-		- Operating system: Selecione “Windows Server”
-		- Runtime: Selecione “Base”
-		- Runtime version: Selecione “aws/codebuild/windows-base:1.0”
-		- Build Specification: Selecione “Insert build commands” e abaixo de “Build commands” clique na opção “Switch do editor” e observe as opções de configurações do arquivo “buildspec.yml”, após isso apague todo o conteúdo e adicione a linhas abaixo:
+		- Seção **Configure your project**
+			- Project name: "immersionday-project"
+		- Seção **Source: What to build** 
+			- Source provider: “AWS CodeCommit”
+			- Repository: “repo-immersionday”
+			- Git clone depth: “1”
+			- Build Badge: “Marque” - a caixa de seleção Build Badge serve para se certificar de que o status de compilação do projeto seja visível e incorporável.
+ 		- Seção **Environment: How to build** 	
+			- Environment image: Selecione “Use an image managed by AWS CodeBuild”
+			- Operating system: Selecione “Windows Server”
+			- Runtime: Selecione “Base”
+			- Runtime version: Selecione “aws/codebuild/windows-base:1.0”
+			- Build Specification: Selecione **Insert build commands** e abaixo de **Build commands** clique na opção **Switch do editor** e observe as opções de configurações de exemplo do arquivo **buildspec.yml** que serão exibidas, após isso apague todo o conteúdo e adicione a linhas abaixo:
 
