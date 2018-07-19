@@ -285,7 +285,7 @@
 		- Seção **Service role**
 			- Selecione **Create a service role in your account**
 			- Role Name: Se você seguiu os exemplos de nomes sugeridos neste tutorial o valor **codebuild-immersionday-project-service-role** deverá estar preenchido.
-			- Clique em *Continue* 
+			- Clique em **Continue** 
 	- Step 2: **Review** 
 		- Dê uma olhada nas configurações e clique em **Save and Build**.
 		- Na tela de seleção do repositório para:
@@ -294,9 +294,9 @@
 19. ### **Integrando o AWS CodeBuild em nosso pipeline**
 
 	Para alterarmos o processo de build e ao invés de utilizarmos o Jenkins, usarmos o projeto do CodeBuild recém criado, precisamos editar o pipeline.
-	Dentro do console de gerenciamento AWS, navegue até o serviço Code Pipeline, selecione o pipeline **pipe-immersionday** e clique no botão **Edit**.
-	Dentro da caixa da fase **Build**, no canto superior direito clique no ícone **lápis** para editar esta seção. E em seguida clique no ícone + paralelo ao **Jenkins-w16** para adicionar uma nova ação.
-	- Na tela **Add Action** preencha conforma abaixo:
+	Dentro do console de gerenciamento AWS, navegue até o serviço **AWS Code Pipeline**, selecione o pipeline **pipe-immersionday** e clique no botão **Edit**.
+	Dentro da caixa da fase **Build**, no canto superior direito clique no ícone **lápis** para editar esta seção. E em seguida clique no ícone **+** paralelo ao **Jenkins-w16** para adicionar uma nova ação.
+	- Na tela **Add Action** preencha conforme abaixo:
 		- Action category: **Build**
 		- Action Name: **Codebuild**
 		- Build Provider: Selecione **AWS CodeBuild**
