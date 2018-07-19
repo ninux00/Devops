@@ -76,6 +76,7 @@
 			- Retorne para o Visual Studio e adicione as informações de acesso contidas no arquivo ".csv" criadas no passo anterior.
 
 9. **Baixando o programa de exemplo.**
+	
 	Neste laboratório utilizaremos dois exemplos de aplicações .NetCore utilizando o SDK da AWS.
 	- Dentro da janela **Team Explorer**, nas opções de repositório **Local** do git, clique em **Clone** e adicione a ULR do repositório de exemplos de aplicações .NET da AWS, *https://github.com/awslabs/aws-sdk-net-samples.git*.
 		- Após clonar o repositório, abra uma janela do **Windows Explorer** e navegue até a raíz dos repositórios “C:\Users\Administrator\source\repos”.
