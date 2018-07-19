@@ -214,7 +214,9 @@
 				- No campo **Artifact Name**, adicione um nome (por exemplo **MyAppBuilt**) para o pacote que será produzido a partir do conteúdo especificado em **Location**. Este nome de artefato também será utilizado durante a configuração do AWS CodePipeline na fase de integração com Jenkins.
 			- Selecione **Salvar** para salvar seu projeto de build. 
 
-17. ### **Criando um Pipeline de desenvolvimento - Continuous Delivery**
+## **Introdução ao Continuous Delivery**
+
+17. ### **Criando um Pipeline de desenvolvimento**
 
 	Neste momento já temos todos os componentes para a execução de um processo de integração e entrega contínua, temos nossa origem de código, temos o servidor Jenkins configurado para compilar e testar o código e temos um ambiente provisionado no AWS Elastic Beanstalk para hospedar nossa aplicação. Agora precisamos de um componente para orquestrar todo o fluxo durante o processo, para isso utilizaremos o AWS CodePipeline. Dentro do console de gerenciamento AWS navegue até o serviço **AWS CodePipeline** e clique em **Get started**:
 	- Step 1 - Name: Nomeie o pipeline, como por exemplo **pipe-immersionday**.
