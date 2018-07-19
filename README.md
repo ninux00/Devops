@@ -250,4 +250,22 @@
 			- Runtime: Selecione “Base”
 			- Runtime version: Selecione “aws/codebuild/windows-base:1.0”
 			- Build Specification: Selecione **Insert build commands** e abaixo de **Build commands** clique na opção **Switch do editor** e observe as opções de configurações de exemplo do arquivo **buildspec.yml** que serão exibidas, após isso apague todo o conteúdo e adicione a linhas abaixo:
-
+			```
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - dotnet restore AspNetCoreWebApplication/AspNetCoreWebApplication.csproj
+      - dotnet restore AspNetCoreWebApplicationTest/AspNetCoreWebApplicationTest.csproj
+  build:
+    commands:
+      - dotnet publish -c release -o ./build_output AspNetCoreWebApplication/AspNetCoreWebApplication.csproj
+      - dotnet publish -c release -o ./test_output AspNetCoreWebApplicationTest/AspNetCoreWebApplicationTest.csproj
+  post_build:
+    commands:
+      - dotnet vstest AspNetCoreWebApplicationTest/test_output/AspNetCoreWebApplicationTest.dll
+artifacts:
+  files:
+    - '**/*'
+  base-directory: AspNetCoreWebApplication/build_output
+			```
