@@ -43,7 +43,9 @@
 		- Baixe o arquivo de configuração com os dados da conexão RDP e abra com seu cliente RDP de preferência. Use a senha descriptografada para ter acesso como “Adminstrator”.
         
 5. ### **Baixar e instalar o visual studio 2017.**
+
 **Dica** - Por padrão as configurações de segurança do IE bloqueaiam o download. Para simplificar e agilizar o processo podemos desabilitar as configurações de segurança do IE abrindo o **Server Manager** do Windows, em seguida selecione **Local Server** e procure por **IE Enhanced Security Configuration** que estará definido como "On", altere para “Off” e feche o **Server Manager**.
+	
 	- Após conectado via RDP ao bastion host, abra o navegador e baixe o visual studio 2017 Community Edition no link *https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15*
 	- Instale o Visual Studio seguindo o processo NNF (não precisa selecionar nenhum pacote adicional), feche o Visual Studio após finalizar a instalação.
 
