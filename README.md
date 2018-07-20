@@ -318,3 +318,23 @@
 	- Através do bastion host edite, edite o index faça o commit da aplicação web para que a mensagem exibida na página seja “You just created a ASP.Net Core web application and published it using CodePipeline integrated with CodeBuild and Elastic Beanstalk!”
 
 
+aws-windows-deployment-manifest.json
+
+```
+{
+  "manifestVersion": 1,
+  "deployments": {
+
+    "aspNetCoreWeb": [
+      {
+        "name": "app",
+        "parameters": {
+          "appBundle": ".",
+          "iisPath": "/",
+          "iisWebSite": "Default Web Site"
+        }
+      }
+    ]
+  }
+}
+```
